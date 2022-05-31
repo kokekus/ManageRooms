@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Reserve room</title>
+  </head>
+  <body>
+    <h2>Reserve {{ name }} room for {{ capacity }} people and with{% if not projector_available %}out{% endif %} projector</h2>
+     <!-- add room form -->
+<form action="" method="POST">
+        {% csrf_token %}
+  <div class="form-group">
+    <label >Reserve room for:</label>
+    <input type="date" class="form-control" name="room_date" placeholder="Enter date">
+  </div>
+
+  <!-- room name error -->
+  {% if date_error_message %}
+  <div class="alert alert-danger d-flex align-items-center" role="alert">
+  <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+  <div>
+    {{ date_error_message }}
+  </div>
+</div>
+  {% endif %}
+
+
+  <div class="form-group">
+    <label>Comment:</label>
+    <input type="text" class="form-control" name="room_comment" placeholder="event name">
+  </div>
+
+  <input type="submit" class="btn btn-primary" value="Reserve room"></input>
+</form>
+      </div>
+</div>
+
+<br>
+<!-- Copyright -->
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    © 2022 Copyright:
+
+    <a class="text-dark" >Bootstrap and Konrad</a>
+  </div>
+  <!-- Copyright -->
+  </body>
+{{ name }}
+{{ capacity }}
+{{ projector_available }}
+{{ error_message }}
+{{ saved_message }}
+</html>
