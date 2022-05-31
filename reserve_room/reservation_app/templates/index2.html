@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Room reserve system</title>
+  </head>
+  <body>
+    <h1>Room reserve system</h1>
+      <!-- Top ribbon -->
+     <div class="card text-center">
+  <div class="card-header">
+    <ul class="nav nav-pills card-header-pills">
+      <li class="nav-item">
+        <a class="nav-link active" href="/">All rooms list</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " href="/room/new">Add room</a>
+      </li>
+    </ul>
+  </div>
+
+     <!-- table -->
+<table class="table">
+  <thead>
+    <tr class="d-flex">
+      <th scope="col" class="col-1">id</th>
+      <th scope="col" class="col-1">Name</th>
+      <th scope="col" class="col-1">Capacity</th>
+      <th scope="col" class="col-1">Projector</th>
+      <th scope="col" class="col-1">Free today?</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for room in rooms %}
+    <tr class="d-flex">
+      <th scope="row" class="col-1">{{ room.id }}</th>
+      <td class="col-1">
+        <a href="/room/{{ room.id }}/">{{ room.name }}</a>
+      </td>
+      <td class="col-1">{{ room.capacity }}</td>
+      {% if room.projector_available %}
+        <td class="col-1" style="color:green;">&#9745;</td>
+      {% else %}
+        <td class="col-1" style="color:red;">&#9746;</td>
+      {% endif %}
+      {% if room.available %}
+        <td class="col-1" style="color:green;">&#9745;</td>
+      {% else %}
+        <td class="col-1" style="color:red;">&#9746;</td>
+      {% endif %}
+      <td class="col-1">
+        <a href="/room/modify/{{ room.id }}/">edit</a>
+      </td>
+      <td class="col-1">
+        <a href="/room/delete/{{ room.id }}/">delete</a>
+      </td>
+      <td class="col-1">
+        <a href="/room/reserve/{{ room.id }}/">reserve</a>
+      </td>
+    </tr>
+    {% empty %}
+      <tr><td colspan="6">No room availbale</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+<!-- table -->
+
+
+
+</div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<!-- Form -->
+<br>
+<h3>Search room</h3>
+<div class="card">
+  <div class="card-body">
+    <form action="/search" method="GET">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="room-name">Room name </label>
+        <input type="text" class="form-control" id="room-name" aria-describedby="room-name-help" placeholder="Room name" name="room_name">
+      </div>
+      <div class="form-group">
+        <label for="capacity">Min capacity</label>
+        <input type="number" step="1" class="form-control" id="capacity" placeholder="10" name="capacity">
+      </div>
+
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" name="projector" id="projector">
+        <label class="form-check-label" for="projector">Projector available</label>
+      </div>
+      <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+  </div>
+</div>
+
+<!-- Form -->
+<!-- Copyright -->
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    © 2022 Copyright:
+    <a class="text-dark" >Bootstrap and Konrad</a>
+  </div>
+  <!-- Copyright -->
+  </body>
+</html>
+{% for d in qs %}
+{{ d }}
+{% endfor %}
