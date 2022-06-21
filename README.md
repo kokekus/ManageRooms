@@ -1,2 +1,3 @@
 # Rooming
-web app for room reservation 
+web app for managing rooms.
+Add, view, edit, reserve, filter and seach 
